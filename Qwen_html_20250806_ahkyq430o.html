@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV IPTV Browser</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    #search {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      margin: 8px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .no-results {
+      text-align: center;
+      color: #777;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>📺 TV IPTV Browser</h1>
+  <input type="text" id="search" placeholder="Szukaj kanału..." />
+
+  <ul id="channels"></ul>
+
+  <script>
+    // Lista przykładowych kanałów TV
+    const channels = [
+      "TVP1",
+      "TVP2",
+      "Polsat",
+      "TVN",
+      "TVP Info",
+      "TVP Sport",
+      "Polsat News",
+      "TVN24",
+      "Discovery",
+      "National Geographic",
+      "Cartoon Network",
+      "Disney Channel",
+      "HBO",
+      "AXN",
+      "MTV",
+      "TV Puls",
+      "TV Republika",
+      "TVP Kultura",
+      "TVP Historia",
+      "Canal+ Sport",
+      "Canal+ Film",
+      "Eurosport",
+      "Animal Planet",
+      "Comedy Central"
+    ];
+
+    const channelList = document.getElementById("channels");
+    const searchInput = document.getElementById("search");
+
+    // Funkcja wyświetlająca kanały
+    function renderChannels(list) {
+      channelList.innerHTML = "";
+      if (list.length === 0) {
+        channelList.innerHTML = "<li class='no-results'>Brak wyników</li>";
+        return;
+      }
+      list.forEach(channel => {
+        const li = document.createElement("li");
+        li.textContent = channel;
+        channelList.appendChild(li);
+      });
+    }
+
+    // Filtruj przy wpisywaniu
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      const filtered = channels.filter(channel => 
+        channel.toLowerCase().includes(query)
+      );
+      renderChannels(filtered);
+    });
+
+    // Wyświetl wszystkie na starcie
+    renderChannels(channels);
+  </script>
+</body>
+</html>

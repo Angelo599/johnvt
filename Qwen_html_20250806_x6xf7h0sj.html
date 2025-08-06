@@ -1,0 +1,60 @@
+<script>
+  const channelList = document.getElementById("channels");
+  const searchInput = document.getElementById("search");
+
+  // Przykład z linkami (ZAMIEŃ NA PRAWIDŁOWE STRUMIENIE)
+  const channels = [
+    { name: "TVP1", url: "https://stream-tv.net/example-tvp1.m3u8" },
+    { name: "TVN", url: "https://stream-tv.net/example-tvn.m3u8" },
+    { name: "Polsat", url: "https://stream-tv.net/example-polsat.m3u8" },
+    { name: "TVN24", url: "https://stream-tv.net/example-tvn24.m3u8" }
+  ];
+
+  function renderChannels(list) {
+    channelList.innerHTML = "";
+    if (list.length === 0) {
+      channelList.innerHTML = "<li class='no-results'>Brak wyników</li>";
+      return;
+    }
+    list.forEach(channel => {
+      const li = document.createElement("li");
+      li.textContent = channel.name;
+      li.style.cursor = "pointer";
+      li.style.color = "#3498db";
+      li.onclick = () => playStream(channel.url, channel.name);
+      channelList.appendChild(li);
+    });
+  }
+
+  function playStream(url, name) {
+    // Dodaj odtwarzacz do strony
+    channelList.innerHTML = `
+      <li style="padding: 0; margin: 10px 0;">
+        <h3>Odtwarzanie: ${name}</h3>
+        <video id="player" controls autoplay style="width:100%; height:auto;">
+          Twoja przeglądarka nie wspiera odtwarzania wideo.
+        </video>
+        <p><button onclick="goBack()">Powrót</button></p>
+      </li>
+    `;
+    const video = document.getElementById("player");
+    video.src = url;
+    video.play().catch(e => alert("Błąd odtwarzania: " + e.message));
+  }
+
+  function goBack() {
+    renderChannels(channels.filter(c => 
+      c.name.toLowerCase().includes(searchInput.value.toLowerCase())
+    ));
+  }
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    const filtered = channels.filter(channel => 
+      channel.name.toLowerCase().includes(query)
+    );
+    renderChannels(filtered);
+  });
+
+  renderChannels(channels);
+</script>
