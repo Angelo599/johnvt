@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Kadr i Czas — autorski katalog fikcyjnych filmów i seriali." />
+    <meta name="theme-color" content="#f3eddf" />
+    <title>Kadr i Czas — Filmy i seriale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Kadr i Czas — strona główna">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>KADR<br />I CZAS</span>
+      </a>
+      <nav aria-label="Główna nawigacja">
+        <a class="active" href="#catalog">Przeglądaj</a>
+        <a href="#about">O projekcie</a>
+      </nav>
+      <button class="saved-link" id="savedFilter" type="button" aria-pressed="false">
+        <span>Zapisane</span><b id="savedCount">0</b>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>Wydanie 01</span> Gabinet filmowych osobliwości</p>
+          <h1 id="hero-title">Historie warte<br /><em>drugiego spojrzenia.</em></h1>
+          <p class="hero-intro">Niezależny wybór wyobrażonego kina: kameralne epopeje, osobliwe komedie i niepowtarzalne światy. Bez algorytmu. Z własnym punktem widzenia.</p>
+          <a class="hero-cta" href="#catalog">Odkryj kolekcję <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="hero-disc"><span>WYBRANE<br />DLA<br />CIEKAWYCH</span></div>
+          <span class="art-note note-one">12 tytułów</span>
+          <span class="art-note note-two">Filmy / Seriale</span>
+        </div>
+      </section>
+
+      <section class="catalog" id="catalog" aria-labelledby="catalog-title">
+        <div class="catalog-heading">
+          <div>
+            <p class="section-number">01 / Kolekcja</p>
+            <h2 id="catalog-title">Przejrzyj archiwum</h2>
+          </div>
+          <p id="resultCount" class="result-count" aria-live="polite"></p>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-wrap" for="searchInput">
+            <span class="sr-only">Przeszukaj katalog</span>
+            <span class="search-icon" aria-hidden="true"></span>
+            <input id="searchInput" type="search" placeholder="Szukaj tytułów, twórców, nastrojów…" autocomplete="off" />
+            <kbd>/</kbd>
+          </label>
+          <div class="type-filter" role="group" aria-label="Filtruj według formatu">
+            <button class="filter-pill active" type="button" data-type="all" aria-pressed="true">Wszystkie</button>
+            <button class="filter-pill" type="button" data-type="Film" aria-pressed="false">Filmy</button>
+            <button class="filter-pill" type="button" data-type="Serial" aria-pressed="false">Seriale</button>
+          </div>
+        </div>
+
+        <div class="genre-row" id="genreFilters" aria-label="Filtruj według gatunku"></div>
+        <div class="catalog-grid" id="catalogGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <span aria-hidden="true">○</span>
+          <h3>W tej części archiwum niczego nie znaleziono.</h3>
+          <p>Spróbuj szerszego wyszukiwania lub wyczyść filtry.</p>
+          <button type="button" id="clearFilters">Wyczyść filtry</button>
+        </div>
+      </section>
+
+      <section class="manifesto" id="about" aria-labelledby="about-title">
+        <p class="section-number">02 / Nasze spojrzenie</p>
+        <div class="manifesto-grid">
+          <h2 id="about-title">Mniej przewijania bez końca.<br /><em>Więcej trwałych wrażeń.</em></h2>
+          <div>
+            <p>Kadr i Czas to koncepcja odkrywania historii poprzez zamkniętą kolekcję w ludzkiej skali. Każdy tytuł jest fikcyjną treścią demonstracyjną, stworzoną po to, by pokazać, jak może wyglądać uważne przeglądanie.</p>
+            <p class="fine-print">Bez abonamentu. Bez odtwarzania. Bez podejrzanych linków.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>KADR<br />I CZAS</span></a>
+      <p>Fikcyjny katalog stworzony w celach demonstracyjnych.</p>
+      <a href="#top">Wróć na górę ↑</a>
+    </footer>
+
+    <dialog id="detailsDialog" aria-labelledby="detailTitle">
+      <div class="dialog-shell">
+        <button class="dialog-close" id="dialogClose" type="button" aria-label="Zamknij szczegóły">×</button>
+        <div class="detail-poster" id="detailPoster" aria-hidden="true"></div>
+        <div class="detail-content">
+          <p class="detail-kicker" id="detailKicker"></p>
+          <h2 id="detailTitle"></h2>
+          <p class="detail-tagline" id="detailTagline"></p>
+          <div class="detail-facts" id="detailFacts"></div>
+          <p class="detail-synopsis" id="detailSynopsis"></p>
+          <div class="detail-credits" id="detailCredits"></div>
+          <button class="save-button" id="detailSave" type="button"></button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>
