@@ -82,11 +82,12 @@ kbd { position: absolute; right: 8px; border: 1px solid var(--line); border-radi
 .poster-button { width: 100%; aspect-ratio: .71; padding: 0; border: 0; overflow: hidden; cursor: pointer; position: relative; display: block; color: inherit; text-align: left; background: #ccc; }
 .poster { position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; isolation: isolate; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
 .poster-button:hover .poster, .poster-button:focus-visible .poster { transform: scale(1.025); }
-.poster::before, .detail-poster::before { content: ""; position: absolute; inset: 0; background: var(--poster); z-index: -2; }
+.poster::before, .detail-poster::before { content: ""; position: absolute; inset: 0; background: var(--poster-image, var(--poster)); background-position: center; background-size: cover; z-index: -2; }
 .poster::after, .detail-poster::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--pattern); }
 .poster-top { display: flex; justify-content: space-between; font: 400 8px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
 .poster-title { font: 600 clamp(23px, 2.5vw, 42px)/.88 var(--display); letter-spacing: -.045em; white-space: pre-line; }
 .poster-year { font: 400 9px var(--mono); }
+.poster.photo-poster { color: var(--paper); text-shadow: 0 1px 12px rgba(0,0,0,.55); }
 .card-meta { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 8px; margin-top: 14px; }
 .card-meta h3 { margin: 0 0 6px; font: 700 14px var(--sans); }
 .card-meta p { margin: 0; color: var(--muted); font: 400 10px var(--mono); }
@@ -149,7 +150,8 @@ dialog::backdrop { background: rgba(11,17,14,.76); backdrop-filter: blur(7px); }
   .catalog-heading { align-items: start; }
   .result-count { margin-top: 8px; }
   .toolbar { grid-template-columns: 1fr; }
-  .type-filter { display: grid; grid-template-columns: repeat(3,1fr); }
+  .type-filter { display: grid; grid-template-columns: repeat(4,1fr); }
+  .filter-pill { padding-inline: 10px; }
   .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 38px 12px; }
   .poster { padding: 13px; }
   .poster-title { font-size: clamp(22px, 8vw, 35px); }
